@@ -1,0 +1,24 @@
+# Ignorar entorno virtual
+venv/
+.venv/
+
+# Ignorar caché de Python
+__pycache__/
+*.pyc
+
+# Ignorar archivos de IDEs y del sistema
+.vscode/
+.idea/
+.DS_Store
+
+# Ignorar datos de Git
+.git/
+.gitignore
+
+# Ignorar datos de MLflow
+mlruns/
+mlartifacts/
+
+# Ignorar el propio Dockerfile y otros archivos de configuración
+Dockerfile*
+.dockerignore
