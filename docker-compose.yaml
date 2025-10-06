@@ -1,0 +1,31 @@
+# docker-compose.yaml
+version: '3.8'
+
+services:
+  # Servicio para ejecutar la API de predicción
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      # Monta la carpeta mlruns para que la API pueda acceder a los modelos
+      - ./mlruns:/app/mlruns
+      # Monta la carpeta de datos (buena práctica tenerla disponible)
+      - ./data:/app/data
+    environment:
+      # Le dice a MLflow dentro del contenedor dónde buscar los modelos
+      - MLFLOW_TRACKING_URI=file:/app/mlruns
+
+  # Servicio para ejecutar el script de entrenamiento
+  training:
+    build: .
+    volumes:
+      # Monta la carpeta mlruns para que el script de entrenamiento guarde ahí los modelos
+      - ./mlruns:/app/mlruns
+      # Monta la carpeta de datos para que el script pueda leer el CSV
+      - ./data:/app/data # <--- AÑADE ESTA LÍNEA
+    environment:
+      # Le dice a MLflow dentro del contenedor dónde guardar los modelos
+      - MLFLOW_TRACKING_URI=file:/app/mlruns
+    # Sobreescribe el comando por defecto del Dockerfile para ejecutar el entrenamiento
+    command: python -m src.pipeline.train
