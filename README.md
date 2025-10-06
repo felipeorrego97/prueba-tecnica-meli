@@ -11,21 +11,22 @@
 
 
 3.  **Promover el modelo a producción:**
-    * Inicia la interfaz de MLflow con el siguiente comando:
-        mlflow ui
-
+    * crea el ambiente virtual: python -m venv venv
+    * activa el ambiente virtual: .\venv\Scripts\Activate.ps1
+    * instala las dependencias: pip install -r requirements.txt
+    * Inicia la interfaz de MLflow con el siguiente comando: mlflow ui
     * Abre tu navegador en `http://127.0.0.1:5000`.
     * Ve a "Models" > "BostonPricePredictor" > "Version 1".
     * Usa el botón "Promote model" para asignarle el alias `production`.
     en esta interfas puedes revisar las métricas del modelo
 
-4.  **Levantar la API de predicción:**
+5.  **Levantar la API de predicción:**
     para levantar el api ejecuta el siguiente comando:
     docker-compose up api
     
     La API ahora estará corriendo y será accesible en `http://127.0.0.1:8000`.
 
-5.  **Probar la API:**
+6.  **Probar la API:**
     Puedes usar la documentación interactiva en [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) para enviar peticiones de prueba.
     el api tiene dos métodos. el Get que devuelve una respuesta genérica de respuesta del api y el post que devuelve la predicción de precio según las variables que enviemos.
 
@@ -45,6 +46,7 @@
   "B": 0,
   "LSTAT": 0
 }
+La respuesta del API está dada en miles de dólares.
 
 este es el significado de cada variable
 
